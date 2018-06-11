@@ -40,7 +40,11 @@ const restaurant = db.define('restaurant', {
   google_map: {
     type: Sequelize.STRING(2500),
     allowNull: false
-  }
+  },
+  categories: {
+    type: Sequelize.STRING(50),
+    allowNull: false
+  },
 }, { timestamps: false });
 
 const user_restaurant = db.define('user_restaurant', {}, { timestamps: false });

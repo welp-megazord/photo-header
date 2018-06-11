@@ -44,5 +44,5 @@ photos();
 userRest();
 
 module.exports = {
-  user
+  users
 }

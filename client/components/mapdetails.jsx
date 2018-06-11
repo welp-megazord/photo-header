@@ -14,9 +14,9 @@ const Mapdetails = (props) => {
           {/* div container to create spacing between icon and details */}
           <css.rest_subheader.map_icon_spacing>
             <strong style={{ fontWeight: 'bold' }}>
-              218 S Lake Ave  <br /> Pasadena, CA 91101
+              {props.address[0]}  <br /> {props.address[1]}, {props.address[2]}
                       </strong>
-            <span> <br /> Pasadena </span>
+            {/* <span> <br /> {props.address[1]} </span> */}
           </css.rest_subheader.map_icon_spacing>
         </css.rest_subheader.mapDetails>
 
@@ -36,7 +36,7 @@ const Mapdetails = (props) => {
             <i className="fas fa-phone"></i>
           </css.rest_subheader.icons>
           <css.rest_subheader.map_icon_spacing>
-            (626) 202-1616
+            {props.phone}
         </css.rest_subheader.map_icon_spacing>
         </css.rest_subheader.mapDetails>
 
@@ -46,7 +46,7 @@ const Mapdetails = (props) => {
             <i className="fas fa-external-link-alt"></i>
           </css.rest_subheader.icons>
           <css.rest_subheader.map_icon_spacing>
-            <a href="/" style={{ color: '#0073bb', textDecoration: 'none' }}> urbanecafe.com </a>
+            <a href="/" style={{ color: '#0073bb', textDecoration: 'none' }}> {props.url} </a>
           </css.rest_subheader.map_icon_spacing>
         </css.rest_subheader.mapDetails>
 

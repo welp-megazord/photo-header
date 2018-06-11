@@ -11,7 +11,7 @@ app.use(parser.urlencoded({extended: true}));
 
 
 // DB
-// require('../db');
+require('../db');
 
 // Static
 app.use(express.static(path.join(__dirname, '../client/dist')));

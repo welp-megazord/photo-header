@@ -1,9 +1,17 @@
 const router = require('express').Router();
+const helper = require('../db/helper');
 
-router.route('/fetchRestaurant')
+router.route('/fetchRestaurant/:id')
   .get((req, res) => {
     console.log('GET request for /fetchRestaurant');
-    res.status(200).send('');
+    console.log(req.params.id);
+    helper.fetchRest(req.params.id, (data) => {
+      address = data.address.split(', ');
+      categories = data.categories.split(' ');
+      data.address = address;
+      data.categories = categories;
+      res.status(200).send(data);
+    });
   });
 
 router.route('/fetchUserID')

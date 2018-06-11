@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import css from './style.jsx';
 import $ from 'jquery';
+import axios from 'axios';
 import Mapdetails from './mapDetails.jsx';
 import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
@@ -13,9 +14,37 @@ class App extends Component {
     this.state = {
       static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
       static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
-      categories: ['Sandwiches,', 'Salad,', 'American (New)'],
+      name: '',
+      address: [],
+      phone: '',
+      url: '',
+      google_map: '',
+      categories: [],
       actions: ['Add Photo', 'Share', 'Save'],
     }
+  }
+
+  componentWillMount() {
+    this.getRestaurant(3);
+  }
+
+  getRestaurant(id) {
+    axios.get('/api/fetchRestaurant/' + id)
+      .then(res => {
+        const data = res.data;
+        // console.log(data);
+        this.setState({
+          name: data.name,
+          address: data.address,
+          phone: data.phone_number,
+          url: data.url,
+          google_map: data.google_map,
+          categories: data.categories
+        })
+      })
+      .catch(err => {
+        console.log('Err in getRestaurant: ', err);
+      });
   }
   render() {
     const nav_bar_icons = ['fas fa-utensils', 'fas fa-glass-martini', 'fas fa-screwdriver']
@@ -32,12 +61,15 @@ class App extends Component {
             </css.header_spacing>
 
             <css.header_spacing>
-              <css.header.search type="text" placeholder="tacos, cheap dinner, Max's">
-              </css.header.search>
+
+              <div style={{ background: 'white', width: '285px', height: '36px' }}>
+                <css.header.search type="text" placeholder="tacos, cheap dinner, Max's" />
+              </div>
+
             </css.header_spacing>
 
-            <css.header.search type="text" placeholder="Los Angeles, CA">
-            </css.header.search>
+            <css.header.search type="text" placeholder="Los Angeles, CA" />
+
 
             <css.header.search_button>
               <span> <i className="fas fa-search"></i> </span>
@@ -102,8 +134,8 @@ class App extends Component {
               {/* Container to hold title and claim status */}
               <css.rest_details.title_claim_div>
                 <h1 style={{ fontSize: '38px', fontWeight: 'bold', display: 'inline', paddingRight: '10px' }}>
-                  Urbane Cafe
-              </h1>
+                  {this.state.name}
+                </h1>
 
                 <div style={{ display: 'inline-block' }}>
                   <span style={{ width: '18px', height: '18px', paddingRight: '10px' }}>
@@ -155,10 +187,10 @@ class App extends Component {
           <css.rest_subheader.subH>
             {/* Container for mapBox and directions and details */}
             <css.rest_subheader.mapBox>
-              <MapBox />
+              <MapBox map={this.state.google_map} />
 
               {/* Map details */}
-              <Mapdetails />
+              <Mapdetails address={this.state.address} phone={this.state.phone} url={this.state.url} />
 
             </css.rest_subheader.mapBox>
 
