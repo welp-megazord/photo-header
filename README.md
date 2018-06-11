@@ -1,1 +1,1 @@
-# photo-header
+# yelp_frontend_capstone
