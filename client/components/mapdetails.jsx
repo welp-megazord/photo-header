@@ -14,7 +14,8 @@ const Mapdetails = (props) => {
           {/* div container to create spacing between icon and details */}
           <css.rest_subheader.map_icon_spacing>
             <strong style={{ fontWeight: 'bold' }}>
-              {props.address[0]}  <br /> {props.address[1]}, {props.address[2]}
+              {/* {props.address[0]}  <br /> {props.address[1]}, {props.address[2]} */}
+              300 N Wilshire, <br /> Los Angeles, CA 91001
                       </strong>
             {/* <span> <br /> {props.address[1]} </span> */}
           </css.rest_subheader.map_icon_spacing>
@@ -36,7 +37,8 @@ const Mapdetails = (props) => {
             <i className="fas fa-phone"></i>
           </css.rest_subheader.icons>
           <css.rest_subheader.map_icon_spacing>
-            {props.phone}
+            {/* {props.phone} */}
+            (626) 300-4170
         </css.rest_subheader.map_icon_spacing>
         </css.rest_subheader.mapDetails>
 
@@ -46,7 +48,8 @@ const Mapdetails = (props) => {
             <i className="fas fa-external-link-alt"></i>
           </css.rest_subheader.icons>
           <css.rest_subheader.map_icon_spacing>
-            <a href="/" style={{ color: '#0073bb', textDecoration: 'none' }}> {props.url} </a>
+            {/* <a href="/" style={{ color: '#0073bb', textDecoration: 'none' }}> {props.url} </a> */}
+            <a href="/" style={{ color: '#0073bb', textDecoration: 'none' }}> urbancafe.com </a>
           </css.rest_subheader.map_icon_spacing>
         </css.rest_subheader.mapDetails>
 

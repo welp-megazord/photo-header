@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
       static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
+      static_categories: ["Coffee & Tea,", "Breakfast & Brunch,", "Desserts"],
       name: '',
       address: [],
       phone: '',
@@ -25,7 +26,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.getRestaurant(3);
+    this.getRestaurant(1);
   }
 
   getRestaurant(id) {
@@ -134,7 +135,8 @@ class App extends Component {
               {/* Container to hold title and claim status */}
               <css.rest_details.title_claim_div>
                 <h1 style={{ fontSize: '38px', fontWeight: 'bold', display: 'inline', paddingRight: '10px' }}>
-                  {this.state.name}
+                  {/* {this.state.name} */}
+                  Urban Cafe
                 </h1>
 
                 <div style={{ display: 'inline-block' }}>
@@ -154,9 +156,15 @@ class App extends Component {
 
               <css.rest_details.category_div>
                 <span style={{ letterSpacing: '1px' }}> $$   &#183; </span>
-                {this.state.categories.map((value, index) => (
+
+                {/* {this.state.categories.map((value, index) => (
+                  <css.rest_details.category href="/" key={index}> {value} </css.rest_details.category>
+                ))} */}
+
+                {this.state.static_categories.map((value, index) => (
                   <css.rest_details.category href="/" key={index}> {value} </css.rest_details.category>
                 ))}
+            
               </css.rest_details.category_div>
 
             </css.rest_details.left_h>

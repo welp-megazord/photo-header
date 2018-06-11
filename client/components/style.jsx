@@ -215,7 +215,7 @@ const rest_details = {
     display: inline-block;
     vertical-align-middle;
     margin-top: 10px !important;
-    width: 360px;
+    width: 380px;
     height: 22px;
   `,
   category: styled.a`

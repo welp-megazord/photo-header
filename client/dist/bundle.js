@@ -715,7 +715,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  vertical-align: baseline;\n']
     _templateObject23 = _taggedTemplateLiteral(['\n    margin-top: 6px !important;\n    width: 525px;\n    height: 42px;\n  '], ['\n    margin-top: 6px !important;\n    width: 525px;\n    height: 42px;\n  ']),
     _templateObject24 = _taggedTemplateLiteral(['\n    margin-top: 15px !important;\n    width: 525px;\n    height: 24px;\n  '], ['\n    margin-top: 15px !important;\n    width: 525px;\n    height: 24px;\n  ']),
     _templateObject25 = _taggedTemplateLiteral(['\n    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png);\n    background-size: 132px 560px;\n    display: inline-block;\n    vertical-align-middle;\n    width: 132px;\n    height: 24px;\n    float: left;\n    margin: -4px 6px 0 0;\n  '], ['\n    background: url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_design_web/9b34e39ccbeb/assets/img/stars/stars.png);\n    background-size: 132px 560px;\n    display: inline-block;\n    vertical-align-middle;\n    width: 132px;\n    height: 24px;\n    float: left;\n    margin: -4px 6px 0 0;\n  ']),
-    _templateObject26 = _taggedTemplateLiteral(['\n    display: inline-block;\n    vertical-align-middle;\n    margin-top: 10px !important;\n    width: 360px;\n    height: 22px;\n  '], ['\n    display: inline-block;\n    vertical-align-middle;\n    margin-top: 10px !important;\n    width: 360px;\n    height: 22px;\n  ']),
+    _templateObject26 = _taggedTemplateLiteral(['\n    display: inline-block;\n    vertical-align-middle;\n    margin-top: 10px !important;\n    width: 380px;\n    height: 22px;\n  '], ['\n    display: inline-block;\n    vertical-align-middle;\n    margin-top: 10px !important;\n    width: 380px;\n    height: 22px;\n  ']),
     _templateObject27 = _taggedTemplateLiteral(['\n    color: #0073bb;\n    text-decoration: none;\n    font-size: 19px;\n  '], ['\n    color: #0073bb;\n    text-decoration: none;\n    font-size: 19px;\n  ']),
     _templateObject28 = _taggedTemplateLiteral(['\n    width: 405px;\n    height: 36px;\n    display: inline;\n    position: relative !important;\n  '], ['\n    width: 405px;\n    height: 36px;\n    display: inline;\n    position: relative !important;\n  ']),
     _templateObject29 = _taggedTemplateLiteral(['\n    display: inline-block;\n    vertical-align: middle;\n    height: 36px;\n    width: 158px;\n    border-color: #8d0005;\n    border-radius: 4px;\n    box-shadow: 0 1px 1px rgba(0,0,0,0.3);\n    background: linear-gradient(#d90007, #c91400);\n    margin-right: 12px;\n    text-align: center;\n  '], ['\n    display: inline-block;\n    vertical-align: middle;\n    height: 36px;\n    width: 158px;\n    border-color: #8d0005;\n    border-radius: 4px;\n    box-shadow: 0 1px 1px rgba(0,0,0,0.3);\n    background: linear-gradient(#d90007, #c91400);\n    margin-right: 12px;\n    text-align: center;\n  ']),
@@ -1745,6 +1745,7 @@ var App = function (_Component) {
     _this.state = {
       static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
       static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
+      static_categories: ["Coffee & Tea,", "Breakfast & Brunch,", "Desserts"],
       name: '',
       address: [],
       phone: '',
@@ -1759,7 +1760,7 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.getRestaurant(3);
+      this.getRestaurant(1);
     }
   }, {
     key: 'getRestaurant',
@@ -1901,7 +1902,7 @@ var App = function (_Component) {
                 _react2.default.createElement(
                   'h1',
                   { style: { fontSize: '38px', fontWeight: 'bold', display: 'inline', paddingRight: '10px' } },
-                  this.state.name
+                  'Urban Cafe'
                 ),
                 _react2.default.createElement(
                   'div',
@@ -1932,7 +1933,7 @@ var App = function (_Component) {
                   { style: { letterSpacing: '1px' } },
                   ' $$   \xB7 '
                 ),
-                this.state.categories.map(function (value, index) {
+                this.state.static_categories.map(function (value, index) {
                   return _react2.default.createElement(
                     _style2.default.rest_details.category,
                     { href: '/', key: index },
@@ -2922,7 +2923,7 @@ var _style2 = _interopRequireDefault(_style);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MapBox = function MapBox(props) {
-  return _react2.default.createElement(_style2.default.rest_subheader.mapImage, { src: props.map });
+  return _react2.default.createElement(_style2.default.rest_subheader.mapImage, { src: 'https://maps.googleapis.com/maps/api/staticmap?scale=2&center=34.046899%2C-118.260718&language=None&zoom=15&markers=scale%3A2%7Cicon%3Ahttps%3A%2F%2Fyelp-images.s3.amazonaws.com%2Fassets%2Fmap-markers%2Fannotation_64x86.png%7C34.046899%2C-118.260718&client=gme-yelp&sensor=false&size=286x135&signature=kGEntvluDVpEEcPLEHcq_R0-jZY=' });
 };
 exports.default = MapBox;
 
@@ -2968,13 +2969,9 @@ var Mapdetails = function Mapdetails(props) {
           _react2.default.createElement(
             'strong',
             { style: { fontWeight: 'bold' } },
-            props.address[0],
-            '  ',
+            '300 N Wilshire, ',
             _react2.default.createElement('br', null),
-            ' ',
-            props.address[1],
-            ', ',
-            props.address[2]
+            ' Los Angeles, CA 91001'
           )
         )
       ),
@@ -3007,7 +3004,7 @@ var Mapdetails = function Mapdetails(props) {
         _react2.default.createElement(
           _style2.default.rest_subheader.map_icon_spacing,
           null,
-          props.phone
+          '(626) 300-4170'
         )
       ),
       _react2.default.createElement(
@@ -3024,9 +3021,7 @@ var Mapdetails = function Mapdetails(props) {
           _react2.default.createElement(
             'a',
             { href: '/', style: { color: '#0073bb', textDecoration: 'none' } },
-            ' ',
-            props.url,
-            ' '
+            ' urbancafe.com '
           )
         )
       ),
