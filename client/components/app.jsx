@@ -8,7 +8,7 @@ import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
-class App extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,11 +62,7 @@ class App extends Component {
             </css.header_spacing>
 
             <css.header_spacing>
-
-              <div style={{ background: 'white', width: '285px', height: '36px' }}>
-                <css.header.search type="text" placeholder="tacos, cheap dinner, Max's" />
-              </div>
-
+              <css.header.search type="text" placeholder="tacos, cheap dinner, Max's" /> 
             </css.header_spacing>
 
             <css.header.search type="text" placeholder="Los Angeles, CA" />
@@ -213,4 +209,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Header;

@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import App from './components/app.jsx';
+import Header from './components/app.jsx';
+import { Route, IndexRoute, Router, browserHistory } from 'react-router';
 
-ReactDom.render(<App />, document.getElementById('root'));
+
+ReactDom.render(<Header />, document.getElementById('header'));
+{/* <Router history={browserHistory}>
+  <Route path="/app" component={App}>
+  </Route>
+</Router> */}

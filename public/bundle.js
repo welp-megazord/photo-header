@@ -1734,13 +1734,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Header = function (_Component) {
-  _inherits(Header, _Component);
+var App = function (_Component) {
+  _inherits(App, _Component);
 
-  function Header(props) {
-    _classCallCheck(this, Header);
+  function App(props) {
+    _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
       static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
@@ -1757,7 +1757,7 @@ var Header = function (_Component) {
     return _this;
   }
 
-  _createClass(Header, [{
+  _createClass(App, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.getRestaurant(1);
@@ -1804,7 +1804,11 @@ var Header = function (_Component) {
             _react2.default.createElement(
               _style2.default.header_spacing,
               null,
-              _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'tacos, cheap dinner, Max\'s' })
+              _react2.default.createElement(
+                'div',
+                { style: { background: 'white', width: '285px', height: '36px' } },
+                _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'tacos, cheap dinner, Max\'s' })
+              )
             ),
             _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'Los Angeles, CA' }),
             _react2.default.createElement(
@@ -1985,10 +1989,10 @@ var Header = function (_Component) {
     }
   }]);
 
-  return Header;
+  return App;
 }(_react.Component);
 
-exports.default = Header;
+exports.default = App;
 
 /***/ }),
 /* 22 */
@@ -3298,11 +3302,13 @@ var _reactRouter = __webpack_require__(84);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('header'));
-{/* <Router history={browserHistory}>
-   <Route path="/app" component={App}>
-   </Route>
-  </Router> */}
+_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('root'));
+_react2.default.createElement(
+  _reactRouter.Router,
+  { history: _reactRouter.browserHistory },
+  _react2.default.createElement(_reactRouter.Route, { path: '/', component: Landing }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/app', component: _app2.default })
+);
 
 /***/ }),
 /* 46 */
