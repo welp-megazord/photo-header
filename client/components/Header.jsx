@@ -29,7 +29,7 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    axios.get('/api/fetchRestaurant/' + id)
+    axios.get('http://localhost:3000/api/fetchRestaurant/' + id)
       .then(res => {
         const data = res.data;
         // console.log(data);

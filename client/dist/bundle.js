@@ -37767,7 +37767,7 @@ var Header = function (_Component) {
     value: function getRestaurant(id) {
       var _this2 = this;
 
-      _axios2.default.get('/api/fetchRestaurant/' + id).then(function (res) {
+      _axios2.default.get('http://localhost:3000/api/fetchRestaurant/' + id).then(function (res) {
         var data = res.data;
         // console.log(data);
         _this2.setState({
