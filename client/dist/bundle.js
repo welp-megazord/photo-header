@@ -3298,7 +3298,7 @@ var _reactRouter = __webpack_require__(84);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('header'));
+_reactDom2.default.render(_react2.default.createElement(_app2.default, null), document.getElementById('Header'));
 {/* <Router history={browserHistory}>
    <Route path="/app" component={App}>
    </Route>

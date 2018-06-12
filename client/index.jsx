@@ -4,7 +4,7 @@ import Header from './components/app.jsx';
 import { Route, IndexRoute, Router, browserHistory } from 'react-router';
 
 
-ReactDom.render(<Header />, document.getElementById('header'));
+ReactDom.render(<Header />, document.getElementById('Header'));
 {/* <Router history={browserHistory}>
   <Route path="/app" component={App}>
   </Route>
