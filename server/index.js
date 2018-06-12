@@ -20,9 +20,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Routers
 app.use('/api', router);
 
-app.get('/app', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
-});
+
 
 // Start up server
 app.listen(PORT, (err) => {
