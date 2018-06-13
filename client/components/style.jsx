@@ -39,6 +39,7 @@ const default_div = styled.div`
 const header = {
   // yelp header background
   h: styled.div`
+    margin: 0;
     padding: 12px 0;
     background: #D3231C url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/15ee41b0c3b2/assets/img/structural/header_stars@2x.png) no-repeat center;
     background-size: 1135px auto, 100%;

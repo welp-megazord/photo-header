@@ -695,7 +695,7 @@ var _templateObject = _taggedTemplateLiteral(['\n  vertical-align: baseline;\n']
     _templateObject3 = _taggedTemplateLiteral(['\nmargin-left: 9px;\nmargin-right: 9px;\nvertical-algin: middle;\ndisplay: table-cell;\n'], ['\nmargin-left: 9px;\nmargin-right: 9px;\nvertical-algin: middle;\ndisplay: table-cell;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\nborder: none;\ntext-decoration: none;\n&:hover{\n  background: rgba(51,51,51,0.3);\n}\n'], ['\nborder: none;\ntext-decoration: none;\n&:hover{\n  background: rgba(51,51,51,0.3);\n}\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  display: block;\n'], ['\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  vertical-align: baseline;\n  display: block;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    padding: 12px 0;\n    background: #D3231C url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/15ee41b0c3b2/assets/img/structural/header_stars@2x.png) no-repeat center;\n    background-size: 1135px auto, 100%;\n  '], ['\n    padding: 12px 0;\n    background: #D3231C url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/15ee41b0c3b2/assets/img/structural/header_stars@2x.png) no-repeat center;\n    background-size: 1135px auto, 100%;\n  ']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    margin: 0;\n    padding: 12px 0;\n    background: #D3231C url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/15ee41b0c3b2/assets/img/structural/header_stars@2x.png) no-repeat center;\n    background-size: 1135px auto, 100%;\n  '], ['\n    margin: 0;\n    padding: 12px 0;\n    background: #D3231C url(https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/15ee41b0c3b2/assets/img/structural/header_stars@2x.png) no-repeat center;\n    background-size: 1135px auto, 100%;\n  ']),
     _templateObject7 = _taggedTemplateLiteral(['\n    vertical-align: baseline;\n    // width: 960px;\n    margin: 0 auto;\n    padding: 0 15px;\n\n    display: table;\n    table-layout: auto;\n  '], ['\n    vertical-align: baseline;\n    // width: 960px;\n    margin: 0 auto;\n    padding: 0 15px;\n\n    display: table;\n    table-layout: auto;\n  ']),
     _templateObject8 = _taggedTemplateLiteral(['\n    background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/48792dd29811/assets/img/logos_desktop/default.png);\n    background-size: 80px 40px;\n    width: 80px;\n    height: 40px; \n    display: table-cell;\n  '], ['\n    background-image: url(https://s3-media1.fl.yelpcdn.com/assets/srv0/yelp_design_web/48792dd29811/assets/img/logos_desktop/default.png);\n    background-size: 80px 40px;\n    width: 80px;\n    height: 40px; \n    display: table-cell;\n  ']),
     _templateObject9 = _taggedTemplateLiteral(['\n    display: table-cell;\n    width: 285px;\n    height: 36px;\n    padding: 0 30px;\n    line-height: 20px;\n    border: none;\n    border-radius: 4px;\n    vertical-align: middle;\n  '], ['\n    display: table-cell;\n    width: 285px;\n    height: 36px;\n    padding: 0 30px;\n    line-height: 20px;\n    border: none;\n    border-radius: 4px;\n    vertical-align: middle;\n  ']),
@@ -37760,7 +37760,7 @@ var Header = function (_Component) {
   _createClass(Header, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.getRestaurant(3);
+      this.getRestaurant(4);
     }
   }, {
     key: 'getRestaurant',

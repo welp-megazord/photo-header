@@ -25,7 +25,7 @@ class Header extends Component {
   }
 
   componentWillMount() {
-    this.getRestaurant(3);
+    this.getRestaurant(4);
   }
 
   getRestaurant(id) {
