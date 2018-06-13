@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
+require('../Gruntfile.js');
 app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));

@@ -41,5 +41,11 @@
     "styled-components": "^3.3.0",
     "webpack": "^2.2.1",
     "webpack-cli": "^2.1.4"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-aws": "^0.6.2",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.1.0"
   }
 }
