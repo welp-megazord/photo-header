@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.initConfig({
 
-        aws: grunt.file.readJSON("aws-keys.json"),
+        aws: grunt.file.readJSON("aws/aws-keys.json"),
 
         s3: {
             options: {
