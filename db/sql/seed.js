@@ -32,7 +32,7 @@ const photos = () => {
 const userRest = () => {
   db.queryInterface.bulkInsert('user_restaurants', data.users_restaurants)
     .then(() => {
-      console.log('Successfully bulk inserted user_restaurants')
+      console.log('Successfully bulk insert ed user_restaurants')
     })
     .catch(err => {
       console.log('Err inserting into users_restaurants table: ', err);

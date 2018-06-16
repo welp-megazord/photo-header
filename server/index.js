@@ -4,7 +4,7 @@ const path = require('path');
 const {router} = require('./routes.js');
 const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 require('../Gruntfile.js');
 app.use(cors());

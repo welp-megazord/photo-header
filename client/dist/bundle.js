@@ -1682,7 +1682,317 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 21 */,
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _style = __webpack_require__(5);
+
+var _style2 = _interopRequireDefault(_style);
+
+var _jquery = __webpack_require__(56);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _axios = __webpack_require__(23);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _mapDetails = __webpack_require__(42);
+
+var _mapDetails2 = _interopRequireDefault(_mapDetails);
+
+var _mapBox = __webpack_require__(41);
+
+var _mapBox2 = _interopRequireDefault(_mapBox);
+
+var _photos = __webpack_require__(43);
+
+var _photos2 = _interopRequireDefault(_photos);
+
+var _restHeader = __webpack_require__(44);
+
+var _restHeader2 = _interopRequireDefault(_restHeader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var dbURL = 'http://ec2-34-201-249-210.compute-1.amazonaws.com:3000';
+
+var Header = function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header(props) {
+    _classCallCheck(this, Header);
+
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.state = {
+      static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
+      static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
+      name: '',
+      address: [],
+      phone: '',
+      url: '',
+      google_map: '',
+      categories: [],
+      actions: ['Add Photo', 'Share', 'Save']
+    };
+    return _this;
+  }
+
+  _createClass(Header, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.getRestaurant(4);
+    }
+  }, {
+    key: 'getRestaurant',
+    value: function getRestaurant(id) {
+      var _this2 = this;
+
+      // axios.get(dbURL + '/api/fetchRestaurant/' + id)
+      _axios2.default.get(dbURL + '/api/fetchRestaurant/' + id).then(function (res) {
+        var data = res.data;
+        // console.log(data);
+        _this2.setState({
+          name: data.name,
+          address: data.address,
+          phone: data.phone_number,
+          url: data.url,
+          google_map: data.google_map,
+          categories: data.categories
+        });
+      }).catch(function (err) {
+        console.log('Err in getRestaurant: ', err);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var nav_bar_icons = ['fas fa-utensils', 'fas fa-glass-martini', 'fas fa-screwdriver'];
+      var action_icons = ['fas fa-camera', 'far fa-share-square', 'fas fa-bookmark'];
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _style2.default.header.h,
+          null,
+          _react2.default.createElement(
+            _style2.default.header.h_content,
+            null,
+            _react2.default.createElement(
+              _style2.default.header_spacing,
+              null,
+              _react2.default.createElement(_style2.default.header.logo, null)
+            ),
+            _react2.default.createElement(
+              _style2.default.header_spacing,
+              null,
+              _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'tacos, cheap dinner, Max\'s' })
+            ),
+            _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'Los Angeles, CA' }),
+            _react2.default.createElement(
+              _style2.default.header.search_button,
+              null,
+              _react2.default.createElement(
+                'span',
+                null,
+                ' ',
+                _react2.default.createElement('i', { className: 'fas fa-search' }),
+                ' '
+              )
+            ),
+            _react2.default.createElement(
+              _style2.default.header.divForSignup,
+              null,
+              _react2.default.createElement(
+                _style2.default.header.signup_button,
+                { href: '/' },
+                'Sign up'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _style2.default.header.nav,
+          null,
+          _react2.default.createElement(
+            _style2.default.header.nav_content_header,
+            null,
+            _react2.default.createElement(
+              _style2.default.header.nav_contents,
+              null,
+              _react2.default.createElement(
+                _style2.default.header.nav_link_div,
+                null,
+                _react2.default.createElement(
+                  'div',
+                  { style: { display: 'inline-block' } },
+                  this.state.static_nav_links.map(function (value, index) {
+                    return _react2.default.createElement(
+                      _style2.default.header.nav_link,
+                      { key: index, href: '/' },
+                      _react2.default.createElement('i', { className: nav_bar_icons[index] }),
+                      ' ',
+                      value
+                    );
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { id: 'beefore' },
+                  ' \xB7 '
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { style: { display: 'inline-block' } },
+                  this.state.static_nav_links_2.map(function (value, index) {
+                    return _react2.default.createElement(
+                      _style2.default.header.nav_link,
+                      { key: index, href: '/' },
+                      value
+                    );
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                _style2.default.header.nav_login_div,
+                null,
+                _react2.default.createElement(
+                  _style2.default.header.nav_login,
+                  { href: '/' },
+                  'Login'
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _style2.default.rest_details.h,
+          null,
+          _react2.default.createElement(
+            _style2.default.rest_details.rest_header,
+            null,
+            _react2.default.createElement(
+              _style2.default.rest_details.left_h,
+              null,
+              _react2.default.createElement(
+                _style2.default.rest_details.title_claim_div,
+                null,
+                _react2.default.createElement(
+                  'h1',
+                  { style: { fontSize: '38px', fontWeight: 'bold', display: 'inline', paddingRight: '10px' } },
+                  this.state.name
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { style: { display: 'inline-block' } },
+                  _react2.default.createElement(
+                    'span',
+                    { style: { width: '18px', height: '18px', paddingRight: '10px' } },
+                    _react2.default.createElement('i', { className: 'far fa-check-circle' })
+                  ),
+                  'Claimed'
+                )
+              ),
+              _react2.default.createElement(
+                _style2.default.rest_details.ratings_div,
+                null,
+                _react2.default.createElement(_style2.default.rest_details.rating_stars, { style: { backgroundPosition: '0 -192px' } }),
+                _react2.default.createElement(
+                  'span',
+                  { style: { color: '#666' } },
+                  ' 46 Reviews '
+                )
+              ),
+              _react2.default.createElement(
+                _style2.default.rest_details.category_div,
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { letterSpacing: '1px' } },
+                  ' $$   \xB7 '
+                ),
+                this.state.categories.map(function (value, index) {
+                  return _react2.default.createElement(
+                    _style2.default.rest_details.category,
+                    { href: '/', key: index },
+                    ' ',
+                    value,
+                    ' '
+                  );
+                })
+              )
+            ),
+            _react2.default.createElement(
+              _style2.default.rest_details.right_h,
+              null,
+              _react2.default.createElement(
+                _style2.default.rest_details.divForReviewButton,
+                null,
+                _react2.default.createElement(
+                  _style2.default.rest_details.review_button,
+                  { href: '/' },
+                  _react2.default.createElement('i', { className: 'fas fa-star' }),
+                  ' Write a review'
+                )
+              ),
+              _react2.default.createElement(
+                _style2.default.rest_details.spanTagForAction,
+                null,
+                this.state.actions.map(function (value, index) {
+                  return _react2.default.createElement(
+                    _style2.default.rest_details.action_button,
+                    { key: index, href: '/' },
+                    _react2.default.createElement('i', { className: action_icons[index] }),
+                    ' ',
+                    value
+                  );
+                })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            _style2.default.rest_subheader.subH,
+            null,
+            _react2.default.createElement(
+              _style2.default.rest_subheader.mapBox,
+              null,
+              _react2.default.createElement(_mapBox2.default, { map: this.state.google_map }),
+              _react2.default.createElement(_mapDetails2.default, { address: this.state.address, phone: this.state.phone, url: this.state.url })
+            ),
+            _react2.default.createElement(_photos2.default, null)
+          )
+        )
+      ) // main div components
+      ;
+    }
+  }]);
+
+  return Header;
+}(_react.Component);
+
+exports.default = Header;
+
+/***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2988,7 +3298,7 @@ var _reactDom = __webpack_require__(22);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Header = __webpack_require__(98);
+var _Header = __webpack_require__(21);
 
 var _Header2 = _interopRequireDefault(_Header);
 
@@ -37654,341 +37964,6 @@ module.exports = function(originalModule) {
 	return module;
 };
 
-
-/***/ }),
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _style = __webpack_require__(5);
-
-var _style2 = _interopRequireDefault(_style);
-
-var _jquery = __webpack_require__(56);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _axios = __webpack_require__(23);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _mapDetails = __webpack_require__(42);
-
-var _mapDetails2 = _interopRequireDefault(_mapDetails);
-
-var _mapBox = __webpack_require__(41);
-
-var _mapBox2 = _interopRequireDefault(_mapBox);
-
-var _photos = __webpack_require__(43);
-
-var _photos2 = _interopRequireDefault(_photos);
-
-var _restHeader = __webpack_require__(44);
-
-var _restHeader2 = _interopRequireDefault(_restHeader);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_Component) {
-  _inherits(Header, _Component);
-
-  function Header(props) {
-    _classCallCheck(this, Header);
-
-    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
-
-    _this.state = {
-      static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
-      static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
-      name: '',
-      address: [],
-      phone: '',
-      url: '',
-      google_map: '',
-      categories: [],
-      actions: ['Add Photo', 'Share', 'Save']
-    };
-    return _this;
-  }
-
-  _createClass(Header, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.getRestaurant(4);
-    }
-  }, {
-    key: 'getRestaurant',
-    value: function getRestaurant(id) {
-      var _this2 = this;
-
-      _axios2.default.get('http://localhost:3000/api/fetchRestaurant/' + id).then(function (res) {
-        var data = res.data;
-        // console.log(data);
-        _this2.setState({
-          name: data.name,
-          address: data.address,
-          phone: data.phone_number,
-          url: data.url,
-          google_map: data.google_map,
-          categories: data.categories
-        });
-      }).catch(function (err) {
-        console.log('Err in getRestaurant: ', err);
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var nav_bar_icons = ['fas fa-utensils', 'fas fa-glass-martini', 'fas fa-screwdriver'];
-      var action_icons = ['fas fa-camera', 'far fa-share-square', 'fas fa-bookmark'];
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _style2.default.header.h,
-          null,
-          _react2.default.createElement(
-            _style2.default.header.h_content,
-            null,
-            _react2.default.createElement(
-              _style2.default.header_spacing,
-              null,
-              _react2.default.createElement(_style2.default.header.logo, null)
-            ),
-            _react2.default.createElement(
-              _style2.default.header_spacing,
-              null,
-              _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'tacos, cheap dinner, Max\'s' })
-            ),
-            _react2.default.createElement(_style2.default.header.search, { type: 'text', placeholder: 'Los Angeles, CA' }),
-            _react2.default.createElement(
-              _style2.default.header.search_button,
-              null,
-              _react2.default.createElement(
-                'span',
-                null,
-                ' ',
-                _react2.default.createElement('i', { className: 'fas fa-search' }),
-                ' '
-              )
-            ),
-            _react2.default.createElement(
-              _style2.default.header.divForSignup,
-              null,
-              _react2.default.createElement(
-                _style2.default.header.signup_button,
-                { href: '/' },
-                'Sign up'
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _style2.default.header.nav,
-          null,
-          _react2.default.createElement(
-            _style2.default.header.nav_content_header,
-            null,
-            _react2.default.createElement(
-              _style2.default.header.nav_contents,
-              null,
-              _react2.default.createElement(
-                _style2.default.header.nav_link_div,
-                null,
-                _react2.default.createElement(
-                  'div',
-                  { style: { display: 'inline-block' } },
-                  this.state.static_nav_links.map(function (value, index) {
-                    return _react2.default.createElement(
-                      _style2.default.header.nav_link,
-                      { key: index, href: '/' },
-                      _react2.default.createElement('i', { className: nav_bar_icons[index] }),
-                      ' ',
-                      value
-                    );
-                  })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { id: 'beefore' },
-                  ' \xB7 '
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { style: { display: 'inline-block' } },
-                  this.state.static_nav_links_2.map(function (value, index) {
-                    return _react2.default.createElement(
-                      _style2.default.header.nav_link,
-                      { key: index, href: '/' },
-                      value
-                    );
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                _style2.default.header.nav_login_div,
-                null,
-                _react2.default.createElement(
-                  _style2.default.header.nav_login,
-                  { href: '/' },
-                  'Login'
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _style2.default.rest_details.h,
-          null,
-          _react2.default.createElement(
-            _style2.default.rest_details.rest_header,
-            null,
-            _react2.default.createElement(
-              _style2.default.rest_details.left_h,
-              null,
-              _react2.default.createElement(
-                _style2.default.rest_details.title_claim_div,
-                null,
-                _react2.default.createElement(
-                  'h1',
-                  { style: { fontSize: '38px', fontWeight: 'bold', display: 'inline', paddingRight: '10px' } },
-                  this.state.name
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { style: { display: 'inline-block' } },
-                  _react2.default.createElement(
-                    'span',
-                    { style: { width: '18px', height: '18px', paddingRight: '10px' } },
-                    _react2.default.createElement('i', { className: 'far fa-check-circle' })
-                  ),
-                  'Claimed'
-                )
-              ),
-              _react2.default.createElement(
-                _style2.default.rest_details.ratings_div,
-                null,
-                _react2.default.createElement(_style2.default.rest_details.rating_stars, { style: { backgroundPosition: '0 -192px' } }),
-                _react2.default.createElement(
-                  'span',
-                  { style: { color: '#666' } },
-                  ' 46 Reviews '
-                )
-              ),
-              _react2.default.createElement(
-                _style2.default.rest_details.category_div,
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { letterSpacing: '1px' } },
-                  ' $$   \xB7 '
-                ),
-                this.state.categories.map(function (value, index) {
-                  return _react2.default.createElement(
-                    _style2.default.rest_details.category,
-                    { href: '/', key: index },
-                    ' ',
-                    value,
-                    ' '
-                  );
-                })
-              )
-            ),
-            _react2.default.createElement(
-              _style2.default.rest_details.right_h,
-              null,
-              _react2.default.createElement(
-                _style2.default.rest_details.divForReviewButton,
-                null,
-                _react2.default.createElement(
-                  _style2.default.rest_details.review_button,
-                  { href: '/' },
-                  _react2.default.createElement('i', { className: 'fas fa-star' }),
-                  ' Write a review'
-                )
-              ),
-              _react2.default.createElement(
-                _style2.default.rest_details.spanTagForAction,
-                null,
-                this.state.actions.map(function (value, index) {
-                  return _react2.default.createElement(
-                    _style2.default.rest_details.action_button,
-                    { key: index, href: '/' },
-                    _react2.default.createElement('i', { className: action_icons[index] }),
-                    ' ',
-                    value
-                  );
-                })
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _style2.default.rest_subheader.subH,
-            null,
-            _react2.default.createElement(
-              _style2.default.rest_subheader.mapBox,
-              null,
-              _react2.default.createElement(_mapBox2.default, { map: this.state.google_map }),
-              _react2.default.createElement(_mapDetails2.default, { address: this.state.address, phone: this.state.phone, url: this.state.url })
-            ),
-            _react2.default.createElement(_photos2.default, null)
-          )
-        )
-      ) // main div components
-      ;
-    }
-  }]);
-
-  return Header;
-}(_react.Component);
-
-exports.default = Header;
 
 /***/ })
 /******/ ]);

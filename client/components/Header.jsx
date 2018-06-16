@@ -8,6 +8,9 @@ import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
+const dbURL = 'http://ec2-34-201-249-210.compute-1.amazonaws.com:3000'
+
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +32,8 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    axios.get('http://localhost:3000/api/fetchRestaurant/' + id)
+    // axios.get(dbURL + '/api/fetchRestaurant/' + id)
+    axios.get(dbURL + '/api/fetchRestaurant/' + id)
       .then(res => {
         const data = res.data;
         // console.log(data);
