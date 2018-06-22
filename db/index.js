@@ -1,24 +1,26 @@
-const sequelize = require('sequelize');
-const user = process.env.pguser || 'Kevin';
-const pass = process.env.pgpass || '';
-const host = process.env.pghost || 'localhost';
+const pg = require('pg');
 
+const client = new pg.Client({
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD
+});
 
-const db = new sequelize('yelp', user, pass, {
-  host: host,
-  dialect: 'postgres',
-})
+client.connect();
 
-db.authenticate()
-.then(() => {
-  console.log('Database has been established successfully');
-  const schema = require('./sql/schema'); //create tables
-})
-.catch(err => {
-  console.log('Unable to connect to database: ', err);
-})
+const restaurantQuery = `
+select
+    *
+from
+    restaurants
+where
+    id = $1
+`;
 
-module.exports = {
-  db
-}
+const fetchRestaurant = (id) => {
+  return client.query(restaurantQuery, [id])
+    .then(result => result.rows[0]);
+};
 
+module.exports = { client, fetchRestaurant };

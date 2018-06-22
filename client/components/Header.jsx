@@ -1,30 +1,28 @@
 import React from 'react';
 import { Component } from 'react';
 import css from './style.jsx';
-import $ from 'jquery';
 import axios from 'axios';
 import Mapdetails from './mapDetails.jsx';
 import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
-const dbURL = 'http://ec2-34-201-249-210.compute-1.amazonaws.com:3000'
-
+const dbURL = 'http://localhost:3000';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      static_nav_links: ['Restaurants', 'Nightlife', 'Home Services'],
-      static_nav_links_2: ['Write a review', 'Events', 'Talk', 'Collections'],
+      staticNavLinks: ['Restaurants', 'Nightlife', 'Home Services'],
+      staticNavLinks2: ['Write a review', 'Events', 'Talk', 'Collections'],
       name: '',
       address: [],
       phone: '',
       url: '',
-      google_map: '',
+      googleMap: '',
       categories: [],
       actions: ['Add Photo', 'Share', 'Save'],
-    }
+    };
   }
 
   componentWillMount() {
@@ -32,7 +30,6 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    // axios.get(dbURL + '/api/fetchRestaurant/' + id)
     axios.get(dbURL + '/api/fetchRestaurant/' + id)
       .then(res => {
         const data = res.data;
@@ -42,17 +39,17 @@ class Header extends Component {
           address: data.address,
           phone: data.phone_number,
           url: data.url,
-          google_map: data.google_map,
+          googleMap: data.google_map,
           categories: data.categories
-        })
+        });
       })
       .catch(err => {
         console.log('Err in getRestaurant: ', err);
       });
   }
   render() {
-    const nav_bar_icons = ['fas fa-utensils', 'fas fa-glass-martini', 'fas fa-screwdriver']
-    const action_icons = ['fas fa-camera', 'far fa-share-square', 'fas fa-bookmark']
+    const navBarIcons = ['fas fa-utensils', 'fas fa-glass-martini', 'fas fa-screwdriver'];
+    const actionIcons = ['fas fa-camera', 'far fa-share-square', 'fas fa-bookmark'];
     return (
       <div>
         <css.header.h>
@@ -66,7 +63,7 @@ class Header extends Component {
 
             <css.header_spacing>
               {/* <div style={{ background: 'white', width: '285px', height: '36px' }}> */}
-                <css.header.search type="text" placeholder="tacos, cheap dinner, Max's" />
+              <css.header.search type="text" placeholder="tacos, cheap dinner, Max's" />
               {/* </div> */}
             </css.header_spacing>
 
@@ -80,7 +77,7 @@ class Header extends Component {
             <css.header.divForSignup>
               <css.header.signup_button href="/">
                 Sign up
-             </css.header.signup_button>
+              </css.header.signup_button>
             </css.header.divForSignup>
 
           </css.header.h_content>
@@ -97,9 +94,9 @@ class Header extends Component {
 
               <css.header.nav_link_div>
                 <div style={{ display: 'inline-block' }}>
-                  {this.state.static_nav_links.map((value, index) => (
+                  {this.state.staticNavLinks.map((value, index) => (
                     <css.header.nav_link key={index} href="/">
-                      <i className={nav_bar_icons[index]}></i> {value}
+                      <i className={navBarIcons[index]}></i> {value}
                     </css.header.nav_link>
                   ))}
                 </div>
@@ -107,7 +104,7 @@ class Header extends Component {
                 <div id="beefore"> &#183; </div>
 
                 <div style={{ display: 'inline-block' }}>
-                  {this.state.static_nav_links_2.map((value, index) => (
+                  {this.state.staticNavLinks2.map((value, index) => (
                     <css.header.nav_link key={index} href="/">
                       {value}
                     </css.header.nav_link>
@@ -144,7 +141,7 @@ class Header extends Component {
                     <i className="far fa-check-circle"></i>
                   </span>
                   Claimed
-              </div>
+                </div>
               </css.rest_details.title_claim_div>
 
               {/* Container to hold stars and reviews count */}
@@ -175,7 +172,7 @@ class Header extends Component {
               <css.rest_details.spanTagForAction>
                 {this.state.actions.map((value, index) => (
                   <css.rest_details.action_button key={index} href="/">
-                    <i className={action_icons[index]}></i> {value}
+                    <i className={actionIcons[index]}></i> {value}
                   </css.rest_details.action_button>
                 ))}
               </css.rest_details.spanTagForAction>
@@ -203,7 +200,7 @@ class Header extends Component {
         </css.rest_details.h>
 
       </div> // main div components
-    )
+    );
   }
 }
 

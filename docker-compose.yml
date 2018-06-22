@@ -1,32 +1,29 @@
-version: '3'
+version: '3.1'
 services:
-
-  webapp:
-    image: header
+  app:
+    image: photo-header:latest
     depends_on:
-      - postgres
+      - db
     links:
-      - postgres
+      - db
     environment:
       PORT: 3000
-      pghost: postgres
-      pguser: Kevin
-      pgpass: docker
-      dburl: http://ec2-34-201-249-210.compute-1.amazonaws.com:3000
-    ports: 
-      - 3000:3000
-
-  proxy:
-    image: whelp-proxy
+      PGHOST: db
+      PGUSER: yelp
+      PGPASSWORD: yelp
     ports:
-      - 80:2000
-
-  postgres:
-    image: postgres:9.6.2-alpine
-    volumes:
-      - /var/lib/postgresql/data
+      - "3000:3000"
+#   proxy:
+#     image: whelp-proxy
+#     ports:
+#       - 80:2000
+  db:
+    image: photo-header-db:latest
+    # volumes:
+    #   - /var/lib/postgresql/data
     environment:
-      POSTGRES_USER: Kevin
+      POSTGRES_USER: yelp
       POSTGRES_DB: yelp
+      POSTGRES_PASSWORD: yelp
     ports:
       - "5432:5432"
