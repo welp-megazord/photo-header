@@ -30,7 +30,7 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    axios.get(dbURL + '/api/fetchRestaurant/' + id)
+    axios.get(dbURL + '/api/restaurant/' + id)
       .then(res => {
         const data = res.data;
         // console.log(data);
