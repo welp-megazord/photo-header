@@ -28,10 +28,14 @@ router.route('/restaurant/:id')
     console.log(`GET /restaurant/${id}`);
     db.getRestaurant(id)
       .then(data => {
-        address = data.address.split(', ');
-        categories = data.categories.split(' ');
-        data.address = address;
-        data.categories = categories;
+        if (data) {
+          address = data.address.split(', ');
+          categories = data.categories.split(' ');
+          data.address = address;
+          data.categories = categories;
+        } else {
+          data = {};
+        }
         res.status(200).send(data);
       });
   })
