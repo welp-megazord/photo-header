@@ -1,92 +1,72 @@
-const pg = require('pg');
+const { MongoClient } = require('mongodb');
 
-const client = new pg.Client({
-  host: process.env.PGHOST,
-  port: process.env.PGPORT,
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD
-});
+const dbUrl = 'mongodb://localhost:27017/yelp';
+let _db, _restaurants, nextId;
 
-client.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database', err);
-  } else {
+MongoClient.connect(dbUrl, { native_parser: true })
+  .then(client => {
     console.log('Successfully connected to the database');
-  }
-});
+    _db = client.db();
+    _restaurants = _db.collection('restaurants');
+    // createIndex is idempotent, so no harm in running this if
+    // the index already exists
+    _restaurants.createIndex({ id: -1 }, {
+      name: 'restaurantIdIndex',
+      unique: true
+    })
+      .then(name => {
+        console.log('Successfully created index:', name);
+      })
+      .catch(err => {
+        console.error('Error creating index:', err);
+        throw err;
+      });
+    // Find where sequential IDs should start from
+    _restaurants.findOne({}, {
+      fields: ['id'],
+      sort: [['id', 'desc']]
+    })
+      .then(({ id }) => {
+        nextId = id + 1;
+        console.log(`IDs will start from ${nextId}`);
+      });
+  })
+  .catch(err => {
+    console.error('Error connecting to db:', err);
+    throw err;
+  });
 
-const postRestaurantQuery = `
-insert into restaurants (
-    name,
-    address,
-    phone_number,
-    url,
-    google_map,
-    categories
-)
-values (
-    $1,
-    $2,
-    $3,
-    $4,
-    $5,
-    $6
-)
-`;
-
-const getRestaurantQuery = `
-select
-    *
-from
-    restaurants
-where
-    id = $1
-`;
-
-const putRestaurantQuery = `
-update
-    restaurants
-set
-    name = coalesce($2, name),
-    address = coalesce($3, address),
-    phone_number = coalesce($4, phone_number),
-    url = coalesce($5, url),
-    google_map = coalesce($6, google_map),
-    categories = coalesce($7, categories)
-where
-    id = $1
-`;
-
-const deleteRestaurantQuery = `
-delete from
-    restaurants
-where
-    id = $1
-`;
+const db = () => _db;
+const restaurants = () => _restaurants;
 
 const postRestaurant = (data) => {
-  const { name, address, phoneNumber, url, googleMap, categories } = data;
-  const args = [ name, address, phoneNumber, url, googleMap, categories ];
-  return client.query(postRestaurantQuery, args);
+  delete data.id;
+  delete data._id;
+  data.id = nextId++;
+  return restaurants().insert(data);
 };
 
 const getRestaurant = (id) => {
-  return client.query(getRestaurantQuery, [ id ])
-    .then(result => result.rowCount ? result.rows[0] : null);
+  return restaurants().findOne({ id: +id })
+    .then(result => {
+      delete result._id;
+      return result;
+    });
 };
 
 const putRestaurant = (id, data) => {
-  const { name, address, phoneNumber, url, googleMap, categories } = data;
-  const args = [ id, name, address, phoneNumber, url, googleMap, categories ];
-  return client.query(putRestaurantQuery, args);
+  delete data.id;
+  delete data._id;
+  return restaurants().update({ id: +id }, { $set: data });
 };
 
 const deleteRestaurant = (id) => {
-  return client.query(deleteRestaurantQuery, [ id ]);
+  return restaurants().remove({ id: +id });
 };
 
 module.exports = {
-  client,
+  db,
+  restaurants,
   postRestaurant,
   getRestaurant,
   putRestaurant,

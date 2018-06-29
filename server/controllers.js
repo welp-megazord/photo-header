@@ -8,24 +8,21 @@ const restaurant = {
     db.getRestaurant(id)
       .then(data => {
         if (data) {
-          address = data.address.split(', ');
-          categories = data.categories.split(' ');
-          data.address = address;
-          data.categories = categories;
+          data.address = data.address.split(', ');
+          data.categories = data.categories.split(' ');
         } else {
           data = {};
         }
         res.status(200).send(data);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.status(500).send();
       });
   },
   // POST a new restaurant
   post(req, res) {
     console.log('POST /restaurant');
-    // console.log('req.body:', req.body);
     const data = req.body;
     if (Array.isArray(data.address)) {
       data.address = data.address.join(', ');
@@ -36,7 +33,7 @@ const restaurant = {
     db.postRestaurant(req.body)
       .then(() => res.status(202).send())
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.status(500).send();
       });
   },
@@ -47,10 +44,17 @@ const restaurant = {
     db.getRestaurant(id)
       .then(data => {
         if (data) {
+          let body = req.body || {};
+          if (Array.isArray(body.address)) {
+            body.address = body.address.join(', ');
+          }
+          if (Array.isArray(body.categories)) {
+            body.categories = body.categories.join(' ');
+          }
           db.putRestaurant(id, req.body)
             .then(() => res.status(202).send())
             .catch(err => {
-              console.log(err);
+              console.error(err);
               res.status(500).send();
             });
         } else {
@@ -59,7 +63,7 @@ const restaurant = {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.status(500).send();
       });
   },
@@ -73,7 +77,7 @@ const restaurant = {
           db.deleteRestaurant(id)
             .then(() => res.status(202).send())
             .catch(err => {
-              console.log(err);
+              console.error(err);
               res.status(500).send();
             });
         } else {
@@ -81,7 +85,7 @@ const restaurant = {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.status(500).send();
       });
   }
