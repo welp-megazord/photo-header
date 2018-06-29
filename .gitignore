@@ -2,3 +2,5 @@ node_modules
 aws
 bundle.js
 .tern-port
+newrelic.js
+newrelic_agent.log
