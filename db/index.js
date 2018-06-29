@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
 
-const dbUrl = 'mongodb://localhost:27017/yelp';
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/yelp';
 let _db, _restaurants, nextId;
 
-MongoClient.connect(dbUrl, { native_parser: true })
+MongoClient.connect(mongoUri, { native_parser: true })
   .then(client => {
     console.log('Successfully connected to the database');
     _db = client.db();
