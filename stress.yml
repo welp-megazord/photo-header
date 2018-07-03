@@ -1,0 +1,33 @@
+config:
+  target: 'http://localhost:3000/api/restaurant'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - name: GET
+    weight: 5
+    flow:
+      - loop:
+        - get:
+            url: "/{{ $randomNumber(1, 10000000) }}"
+        count: 10
+  - name: POST
+    weight: 1
+    flow:
+      - loop:
+        - post:
+            url: "/"
+            json:
+              companyName: "Awesomest Restaurant"
+              address:
+                - "123 Somewhere St"
+                - "Acme CA"
+                - "90304"
+              phoneNumber: "(555) 555-5555"
+              url: "https://google.com"
+              googleMap: "https://maps.google.com"
+              categories:
+                - "foo"
+                - "bar"
+                - "baz"
+        count: 10

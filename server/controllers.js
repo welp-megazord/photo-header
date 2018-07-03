@@ -1,10 +1,14 @@
 const db = require('../db');
 
+const maybeLog = process.env.DEBUG
+  ? console.log.bind(console)
+  : () => {};
+
 const restaurant = {
   // GET a restaurant
   get(req, res) {
     const { id } = req.params;
-    console.log(`GET /restaurant/${id}`);
+    maybeLog(`GET /restaurant/${id}`);
     db.getRestaurant(id)
       .then(data => {
         if (data) {
@@ -22,7 +26,7 @@ const restaurant = {
   },
   // POST a new restaurant
   post(req, res) {
-    console.log('POST /restaurant');
+    maybeLog('POST /restaurant');
     const data = req.body;
     if (Array.isArray(data.address)) {
       data.address = data.address.join(', ');
@@ -40,7 +44,7 @@ const restaurant = {
   // PUT changes to a restaurant
   put(req, res) {
     const { id } = req.params;
-    console.log(`PUT /api/restaurant/${id}`);
+    maybeLog(`PUT /api/restaurant/${id}`);
     db.getRestaurant(id)
       .then(data => {
         if (data) {
@@ -70,7 +74,7 @@ const restaurant = {
   // DELETE a restaurant
   delete(req, res) {
     const { id } = req.params;
-    console.log(`DELETE /api/restaurant/${id}`);
+    maybeLog(`DELETE /api/restaurant/${id}`);
     db.getRestaurant(id)
       .then(data => {
         if (data) {

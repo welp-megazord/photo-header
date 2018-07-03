@@ -1,29 +1,21 @@
 version: '3.1'
+
 services:
   app:
     image: photo-header:latest
-    depends_on:
-      - db
-    links:
-      - db
+    # image: johnmastro/photo-header:latest
     environment:
       PORT: 3000
-      PGHOST: db
-      PGUSER: yelp
-      PGPASSWORD: yelp
+      MONGO_HOST: 52.53.188.2
+      # MONGO_HOST: localhost
+      MONGO_USER: root
+      MONGO_PORT: 27017
+      MONGO_PSWD_FILE: /run/secrets/mongo-password
     ports:
       - "3000:3000"
-#   proxy:
-#     image: whelp-proxy
-#     ports:
-#       - 80:2000
-  db:
-    image: photo-header-db:latest
-    # volumes:
-    #   - /var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: yelp
-      POSTGRES_DB: yelp
-      POSTGRES_PASSWORD: yelp
-    ports:
-      - "5432:5432"
+    secrets:
+      - mongo-password
+
+secrets:
+  mongo-password:
+    file: ./mongo-password
