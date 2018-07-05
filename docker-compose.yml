@@ -2,8 +2,7 @@ version: '3.1'
 
 services:
   app:
-    image: photo-header:latest
-    # image: johnmastro/photo-header:latest
+    image: johnmastro/photo-header:latest
     environment:
       PORT: 3000
       MONGO_HOST: 52.53.188.2
