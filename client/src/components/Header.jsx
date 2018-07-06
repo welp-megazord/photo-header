@@ -7,7 +7,7 @@ import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
-const dbURL = 'http://localhost:3000';
+const apiURL = '';
 
 class Header extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    axios.get(dbURL + '/api/restaurant/' + id)
+    axios.get(apiURL + '/api/header/restaurant/' + id)
       .then(res => {
         const data = res.data;
         // console.log(data);

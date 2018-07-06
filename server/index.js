@@ -21,7 +21,7 @@ app.use(parser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use('/api', router);
+app.use('/api/header', router);
 
 app.listen(PORT, (err) => {
   if (err) {
