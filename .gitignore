@@ -2,7 +2,11 @@ node_modules
 .env
 aws
 bundle.js
+bundle-server.js
+app.js
+app-server.js
 .tern-port
 newrelic.js
 newrelic_agent.log
 mongo-password
+loaderio-*.txt

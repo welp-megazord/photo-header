@@ -2,15 +2,9 @@ const path = require("path");
 const SRC_DIR = path.join(__dirname, "/client/src");
 const DIST_DIR = path.join(__dirname, "/client/dist");
 
-module.exports = {
-  entry: {
-    app: `${SRC_DIR}/index.jsx`
-  },
-  output: {
-    filename: "bundle.js",
-    path: DIST_DIR
-  },
-  devtool: 'eval-source-map',
+// See: https://stackoverflow.com/questions/37788142/webpack-for-back-end
+
+const common = {
   module: {
     rules: [
       {
@@ -18,17 +12,34 @@ module.exports = {
         include: SRC_DIR,
         use: [
           {
-            loader: "babel-loader",
-            // query: {
-            //   presets: ["react", "env"]
-            // }
+            loader: "babel-loader"
           }
         ]
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
       }
     ]
   }
 };
+
+const client = {
+  entry: `${SRC_DIR}/client.js`,
+  output: {
+    path: DIST_DIR,
+    filename: 'app.js'
+  },
+  devtool: 'eval-source-map',
+};
+
+const server = {
+  entry: `${SRC_DIR}/server.js`,
+  target: 'node',
+  output: {
+    path: DIST_DIR,
+    filename: 'app-server.js',
+    libraryTarget: 'commonjs-module'
+  }
+};
+
+module.exports = [
+  { ...common, ...client },
+  { ...common, ...server }
+];
