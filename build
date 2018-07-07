@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+static_dir=./client/dist
+static_lib="${static_dir}/lib"
+bower_components=./bower_components
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: build TAG"
+    exit 1
+else
+    tag="$1"
+fi
+
+mkdir -p $static_lib
+
+if [[ -d "${bower_components}/react" ]]; then
+    cp -f "${bower_components}/react/react.development.js" $static_lib
+    cp -f "${bower_components}/react/react.production.min.js" $static_lib
+    cp -f "${bower_components}/react/react-dom.development.js" $static_lib
+    cp -f "${bower_components}/react/react-dom.production.min.js" $static_lib
+else
+    echo "React not found"
+    exit 1
+fi
+
+docker build -t $tag .
+
+# vi:syntax=sh
