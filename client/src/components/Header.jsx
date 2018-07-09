@@ -7,8 +7,6 @@ import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
-const apiURL = '';
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,11 @@ class Header extends Component {
   }
 
   getRestaurant(id) {
-    axios.get(apiURL + '/api/header/restaurant/' + id)
+    let url = `/api/header/restaurant/${id}`;
+    if (this.props.apiHost) {
+      url = this.props.apiHost + url;
+    }
+    axios.get(url)
       .then(res => {
         const data = res.data;
         // console.log(data);
