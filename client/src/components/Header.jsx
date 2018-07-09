@@ -7,7 +7,7 @@ import MapBox from './mapBox.jsx';
 import Photos from './photos.jsx';
 import ResHeader from './restHeader.jsx';
 
-const apiURL = 'http://18.144.16.254:8080';
+const apiURL = '';
 
 class Header extends Component {
   constructor(props) {
